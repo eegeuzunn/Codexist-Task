@@ -4,10 +4,10 @@ services:
     ports:
       - "8070:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/places
-      - SPRING_DATASOURCE_USERNAME=user
-      - SPRING_DATASOURCE_PASSWORD=password
-      - PLACES_API_KEY=key
+      DB_URL: jdbc:postgresql://db:5432/places
+      DB_USERNAME: user
+      DB_PASSWORD: password
+      PLACES_API_KEY: ${PLACES_API_KEY}
     depends_on:
       - db
 
