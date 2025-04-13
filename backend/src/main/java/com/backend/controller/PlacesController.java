@@ -1,7 +1,11 @@
 package com.backend.controller;
 
 import com.backend.service.PlacesService;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/places")
+@Validated
 public class PlacesController {
 
     private final PlacesService placesService;
@@ -18,7 +23,11 @@ public class PlacesController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getNearbyPlaces(@RequestParam Double longitude, @RequestParam Double latitude, @RequestParam Double radius) {
+    public ResponseEntity<?> getNearbyPlaces(
+            @RequestParam @NotNull @Min(value = -180) @Max(value = 180) Double longitude,
+            @RequestParam @NotNull @Min(value = -90) @Max(value = 90) Double latitude,
+            @RequestParam @NotNull @Min(value = 0) @Max(value = 50000) Double radius) {
+
         String result = placesService.getNearbyPlacesByLocation(longitude, latitude, radius);
         return ResponseEntity.ok(result);
     }
