@@ -19,7 +19,19 @@ const App = () => {
           gestureHandling={'greedy'}
           disableDefaultUI={true}
         >
-          <AdvancedMarker position={{lat: 41.017674700000008, lng: 28.876107299999997} }/>
+          {placesList && (placesList.length > 0) && placesList.map((place, index) => (
+            <AdvancedMarker
+              key={index}
+              position={{
+                lat: place.location.latitude,
+                lng: place.location.longitude,
+              }}
+              onClick={() => {
+                window.open(place.googleMapsUri, '_blank');
+              }
+            }
+              />
+          ))}
         </Map>
       </APIProvider>
     </>
