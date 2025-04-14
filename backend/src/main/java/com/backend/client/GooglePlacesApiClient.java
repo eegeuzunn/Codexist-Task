@@ -38,7 +38,8 @@ public class GooglePlacesApiClient {
                                 "places.formattedAddress," +
                                 "places.shortFormattedAddress," +
                                 "places.websiteUri," +
-                                "places.googleMapsUri," )
+                                "places.googleMapsUri," +
+                                "places.location")
                 .header("X-Goog-Api-Key", ApiKey)
                 .body(
                         new GoogleNearbyPlacesPostRequestDto(
