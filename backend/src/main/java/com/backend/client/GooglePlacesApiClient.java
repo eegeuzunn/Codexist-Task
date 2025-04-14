@@ -4,7 +4,11 @@ import com.backend.dto.clientrequest.google.Circle;
 import com.backend.dto.clientrequest.google.GoogleNearbyPlacesPostRequestDto;
 import com.backend.dto.clientrequest.google.Location;
 import com.backend.dto.clientrequest.google.LocationRestriction;
+import com.backend.exception.GooglePlacesApiDownException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -16,13 +20,15 @@ public class GooglePlacesApiClient {
     private String ApiKey;
 
     private final RestClient restClient;
-
+    private final Logger logger = LoggerFactory.getLogger(GooglePlacesApiClient.class);
 
     public GooglePlacesApiClient(RestClient restClient) {
         this.restClient = restClient;
     }
 
     public String getNearbyPlaces(Double longitude, Double latitude, Double radius) {
+
+        logger.info("Calling Google Places API with longitude: {}, latitude: {}, radius: {}", longitude, latitude, radius);
         String result = restClient.post()
                 .uri("https://places.googleapis.com/v1/places:searchNearby")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -47,7 +53,13 @@ public class GooglePlacesApiClient {
                         )
                 )
                 .retrieve()
+                .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
+                    logger.error("Google Places API is down, received 5xx error: {}", response.getStatusCode());
+                    throw new GooglePlacesApiDownException("Service is down due to google places api");
+                })
                 .body(String.class);
+
+        logger.info("Received response from Google Places API");
         return result;
     }
 }
