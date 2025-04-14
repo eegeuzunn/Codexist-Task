@@ -4,6 +4,8 @@ import com.backend.client.GooglePlacesApiClient;
 import com.backend.model.Places;
 import com.backend.model.PlacesId;
 import com.backend.repository.PlacesRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,7 @@ public class PlacesService {
 
     private final GooglePlacesApiClient googlePlacesApiClient;
     private final PlacesRepository placesRepository;
+    private final Logger logger = LoggerFactory.getLogger(PlacesService.class);
 
     public PlacesService(GooglePlacesApiClient googlePlacesApiClient, PlacesRepository placesRepository) {
         this.googlePlacesApiClient = googlePlacesApiClient;
@@ -27,10 +30,10 @@ public class PlacesService {
 
         // Databasede var mı diye kontrol ediyoruz. Yoksa Places Api çaprısı yapıyoruz ve gelen sonucu kaydediyoruz.
         if(places.isPresent()){
-            System.out.println("Places found in database");
+            logger.info("Places found in database, returning from cache for [longitude: {}, latitude: {}, radius: {}]", longitude, latitude, radius);
             return places.get().getResult();
         } else{
-            System.out.println("Places not found in database, calling Google Places API");
+            logger.info("Places not found in database, calling Google Places API for [longitude: {}, latitude: {}, radius: {}]", longitude, latitude, radius);
             String apiCallResult = googlePlacesApiClient.getNearbyPlaces(longitude, latitude, radius);
             placesRepository.save(new Places(new PlacesId(longitude, latitude, radius), apiCallResult));
             return apiCallResult;
