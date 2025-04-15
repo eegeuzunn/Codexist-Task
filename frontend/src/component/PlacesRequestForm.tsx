@@ -2,6 +2,7 @@ import "./PlacesRequestForm.css";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { places } from "../types/requestTypes";
 
+
 type Inputs = {
     latitude: number,
     longitude: number,
@@ -10,14 +11,15 @@ type Inputs = {
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL ? import.meta.env.VITE_BACKEND_URL : "http://localhost:8080";
 
-function PlacesRequestForm({OnApiCall}: {OnApiCall: (places: places[]) => void}) {
+function PlacesRequestForm({OnApiCall, FocusPosition}: {OnApiCall: (places: places[]) => void, FocusPosition: (position: {lat: number, lng: number}) => void}) {
 
-    const {register, handleSubmit, formState: { errors }} = useForm<Inputs>()
+    const {register, handleSubmit, formState: { errors }, getValues} = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         fetch(`${backendUrl}/api/v1/places?latitude=${data.latitude}&longitude=${data.longitude}&radius=${data.radius}`)
         .then((response) => response.json())
         .then((data) => {
             OnApiCall(data.places);
+            FocusPosition({lat: getValues("latitude"), lng: getValues("longitude")});
             console.log("Fetched places:", data);
         })
         .catch((error) => {
