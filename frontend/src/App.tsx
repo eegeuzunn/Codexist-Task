@@ -1,11 +1,25 @@
-import {AdvancedMarker, APIProvider, Map, Marker} from '@vis.gl/react-google-maps';
+import {AdvancedMarker, APIProvider, Map, Marker, InfoWindow} from '@vis.gl/react-google-maps';
 import PlacesRequestForm from './component/PlacesRequestForm';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {places} from './types/requestTypes';
+import AdvancedMarkerWithRef from './component/AdvancedMarkerWithRef';
+import CustomAdvancedMarker from './component/CustomAdvancedMarker';
 
 const App = () => {
 
   const [placesList, setPlacesList] = useState<places[]>([]);
+
+  const [selectedMarkerIndex, setSelectedMarkerIndex] = useState<string | null>(null);
+  const [selectedMarker, setSelectedMarker] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
+  const [infoWindowShown, setInfoWindowShown] = useState(false);
+
+
+  
+
+  const onCloseClick = useCallback(() =>{
+    setSelectedMarker(null);
+    setInfoWindowShown(false);
+  }, []);
 
   return (
     <>
@@ -19,19 +33,16 @@ const App = () => {
           gestureHandling={'greedy'}
           disableDefaultUI={true}
         >
-          {placesList && (placesList.length > 0) && placesList.map((place, index) => (
-            <AdvancedMarker
-              key={index}
-              position={{
-                lat: place.location.latitude,
-                lng: place.location.longitude,
-              }}
-              onClick={() => {
-                window.open(place.googleMapsUri, '_blank');
+          {placesList.map((place) => {
+            return (
+              <CustomAdvancedMarker position={
+                new google.maps.LatLng(place.location.latitude, place.location.longitude)
               }
-            }
+              place={place}
               />
-          ))}
+            );
+          }
+          )}
         </Map>
       </APIProvider>
     </>
