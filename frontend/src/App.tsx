@@ -25,7 +25,7 @@ const App = () => {
           gestureHandling={'greedy'}
           disableDefaultUI={true}
         >
-          {placesList.map((place) => {
+          {placesList && (placesList.map((place) => {
             return (
               <CustomAdvancedMarker position={
                 new google.maps.LatLng(place.location.latitude, place.location.longitude)
@@ -34,7 +34,7 @@ const App = () => {
               />
             );
           }
-          )}
+          ))}
         </Map>
         <MapPanToSearch centerPosition={centerPosition} />
       </APIProvider>
