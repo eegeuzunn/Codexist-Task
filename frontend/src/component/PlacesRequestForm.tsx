@@ -33,12 +33,12 @@ function PlacesRequestForm({OnApiCall}: {OnApiCall: (places: places[]) => void})
             max: { value: 90, message: "Latitude must be ≤ 90" }
                 })} placeholder="latitude"></input>
         <input {...register("longitude", {
-            required: "Longitude must be between -180 and 180",
+            required: "Longitude is required",
             min: {value:-180, message: "Longitude must be ≥ -180"},
             max: {value:180, message: "Longitude must be ≤ 180"}
                 })} placeholder="longitude"></input>
         <input {...register("radius", {
-            required: "Radius must be between 0 and 50000", 
+            required: "Radius is required", 
             min: {value:-0, message: "Radius must be ≥ 0"},
             max: {value:50000, message: "Radius must be ≤ 50000"} 
                 })} placeholder="radius"></input>

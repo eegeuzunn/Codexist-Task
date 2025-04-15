@@ -41,7 +41,7 @@
 }
 
 .error-message {
-    color: red;
+    color: rgb(212, 101, 101);
     font-weight: bold;
     font-size: 0.8rem;
     margin-top: 0.5rem;
