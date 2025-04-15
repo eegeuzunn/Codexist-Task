@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import static org.hibernate.Length.LONG32;
 
 @Entity
+@Table(name = "places")
 public class Places {
 
     //Normalde düz id verip jpa sorgusunda değerler ile aratabilirdik daha kolay olurdu. Burda biraz daha işi değiştirmek
