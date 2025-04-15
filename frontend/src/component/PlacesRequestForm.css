@@ -1,0 +1,49 @@
+.places-request-form {
+    z-index: 1000;
+    position: fixed;
+    background-color: #191919;
+    padding: 25px;
+    border-radius: 5px;
+    width: 250px;
+    margin: 20px;
+}
+
+.request-form {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.request-form input {
+    color:#004650;
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.request-form input:focus {
+    outline: none;
+}
+
+.request-form button {
+    padding: 0.5rem;
+    background-color: #004650;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.request-form button:hover {
+    background-color: #003740;
+}
+
+.error-message {
+    color: rgb(212, 101, 101);
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+

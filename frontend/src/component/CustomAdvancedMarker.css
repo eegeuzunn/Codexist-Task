@@ -1,0 +1,33 @@
+.info-window-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #004650;
+}
+
+.info-window-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    margin:5px;
+}
+
+.info-window-links {
+    margin: 10px 5px 5px 5px;
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.875rem;
+}
+
+.info-window-links a{
+    text-decoration: none;
+    color: #004650;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.info-window-links a:hover{
+    color: #003740;
+}
