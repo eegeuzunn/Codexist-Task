@@ -9,7 +9,7 @@ type Inputs = {
     radius: number,
   }
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL ? import.meta.env.VITE_BACKEND_URL : "http://localhost:8080";
+const backendUrl = import.meta.env.VITE_BACKEND_URL ? import.meta.env.VITE_BACKEND_URL : "http://localhost:8070";
 
 function PlacesRequestForm({OnApiCall, FocusPosition}: {OnApiCall: (places: places[]) => void, FocusPosition: (position: {lat: number, lng: number}) => void}) {
 

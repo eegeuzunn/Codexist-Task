@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { AdvancedMarker, useAdvancedMarkerRef } from '@vis.gl/react-google-maps';
 import { InfoWindow } from '@vis.gl/react-google-maps';
 import { places } from '../types/requestTypes';
