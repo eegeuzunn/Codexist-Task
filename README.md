@@ -4,7 +4,7 @@ This project is a case study built for Codexist. It’s a full-stack web applica
 
 ## 🚀 Live Demo (Uses free tier render, so it can be unavailable)
 
-- **Frontend:** [https://codexist-frontend-xyz.onrender.com](https://codexist-frontend-xyz.onrender.com)
+- **Frontend:** [https://codexist-frontend.onrender.com](https://codexist-frontend.onrender.com)
 - **Backend:** [https://codexist-backend-kwqy.onrender.com](https://codexist-backend-kwqy.onrender.com)
 
 ---
