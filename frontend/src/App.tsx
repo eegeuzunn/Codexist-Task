@@ -9,18 +9,6 @@ const App = () => {
 
   const [placesList, setPlacesList] = useState<places[]>([]);
 
-  const [selectedMarkerIndex, setSelectedMarkerIndex] = useState<string | null>(null);
-  const [selectedMarker, setSelectedMarker] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
-  const [infoWindowShown, setInfoWindowShown] = useState(false);
-
-
-  
-
-  const onCloseClick = useCallback(() =>{
-    setSelectedMarker(null);
-    setInfoWindowShown(false);
-  }, []);
-
   return (
     <>
       <PlacesRequestForm OnApiCall={setPlacesList} />
