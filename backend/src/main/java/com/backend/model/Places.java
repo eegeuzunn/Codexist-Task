@@ -3,6 +3,9 @@ package com.backend.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+import java.util.Objects;
 
 import static org.hibernate.Length.LONG32;
 
@@ -43,4 +46,15 @@ public class Places {
         this.result = result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Places places = (Places) o;
+        return Objects.equals(placesId, places.placesId) && Objects.equals(result, places.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(placesId, result);
+    }
 }
