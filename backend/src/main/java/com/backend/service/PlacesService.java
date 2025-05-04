@@ -35,7 +35,7 @@ public class PlacesService {
         } else{
             logger.info("Places not found in database, calling Google Places API for [longitude: {}, latitude: {}, radius: {}]", longitude, latitude, radius);
             String apiCallResult = googlePlacesApiClient.getNearbyPlaces(longitude, latitude, radius);
-            placesRepository.save(new Places(new PlacesId(longitude, latitude, radius), apiCallResult));
+            placesRepository.save(new Places(id, apiCallResult));
             return apiCallResult;
         }
     }
